@@ -4,12 +4,16 @@ interface TouchableIconProps {
   marginRight?: string;
 }
 
+interface CardProps {
+  backgroundColor: string;
+}
+
 interface CardTagProps {
   marginLeft?: string;
   backgroundColor: string;
 }
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   display: flex;
   flex: 1;
   padding: 0 40px;
@@ -51,14 +55,14 @@ export const InputWrapper = styled.View`
   margin-top: 24px;
 `;
 
-export const Card = styled.View`
+export const Card = styled.View<CardProps>`
   height: 116px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 30px;
   padding: 20px;
-  background: #8bbe8a;
+  background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px;
   position: relative;
 `;
@@ -110,4 +114,25 @@ export const CardTagText = styled.Text`
   line-height: 14px;
   color: #ffffff;
   margin-left: 5px;
+`;
+
+export const PokemonImageWrapper = styled.View`
+  position: absolute;
+  right: 5%;
+  top: -30%;
+`;
+
+export const PokemonImage = styled.Image`
+  width: 130px;
+  height: 130px;
+`;
+
+export const TypeIcon = styled.Image`
+  width: 15px;
+  height: 15px;
+  tint-color: #fff;
+`;
+
+export const ListContainer = styled.View`
+  margin-bottom: 40px;
 `;

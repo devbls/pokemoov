@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
 
 import {
   Container,
@@ -15,30 +14,55 @@ import {
   CardTags,
   CardTag,
   CardTagText,
+  PokemonImageWrapper,
+  PokemonImage,
+  TypeIcon,
+  ListContainer,
 } from './styles';
 import GenerationsSvg from '../../assets/icons/generations.svg';
 import SortSvg from '../../assets/icons/sort.svg';
 import FiltersSvg from '../../assets/icons/filters.svg';
-import GrassTypeWhiteSvg from '../../assets/icons/types/grass-white.svg';
-import PoisonTypeWhiteSvg from '../../assets/icons/types/poison-white.svg';
-import BulbasaurSvg from '../../assets/images/pokemon/bulbasaur.svg';
-import IvysaurSvg from '../../assets/images/pokemon/ivysaur.svg';
 import CustomInput from '../../components/CustomInput';
+import FiltersModal from '../../components/Home/FiltersModal';
+import { Pokemon } from '../../types/pokemon';
+import {
+  handlePokemonTypeColors,
+  uppercaseFirstLetter,
+} from '../../utils/strings';
+import { getPokemons } from '../../services/api/pokemon';
+import { addLeftZeros } from '../../utils/numbers';
+import { handlePokemonTypeIcons } from '../../utils/icons';
 
 function Home() {
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFiltersModalVisible, setFiltersModalVisible] = useState(false);
+
+  const toggleFiltersModal = () => {
+    setFiltersModalVisible(!isFiltersModalVisible);
+  };
+
+  async function getPokemonsList() {
+    const data = await getPokemons();
+
+    setPokemons(data);
+  }
+
+  useEffect(() => {
+    getPokemonsList();
+  }, []);
 
   return (
     <Container>
       <FiltersStack>
         <TouchableIcon marginRight="24px">
-          <GenerationsSvg width={24} height={24} alt="Generations" />
+          <GenerationsSvg width={24} height={24} />
         </TouchableIcon>
         <TouchableIcon marginRight="24px">
-          <SortSvg width={24} height={24} alt="Sort" />
+          <SortSvg width={24} height={24} />
         </TouchableIcon>
-        <TouchableIcon>
-          <FiltersSvg width={24} height={24} alt="Filters" />
+        <TouchableIcon onPress={toggleFiltersModal}>
+          <FiltersSvg width={24} height={24} />
         </TouchableIcon>
       </FiltersStack>
       <Title>Pokédex</Title>
@@ -52,58 +76,40 @@ function Home() {
           setValue={setSearchQuery}
         />
       </InputWrapper>
-      <ScrollView>
-        <Card>
-          <CardInfoWrapper>
-            <CardNumber>#001</CardNumber>
-            <CardTitle>Bulbasaur</CardTitle>
-            <CardTags>
-              <CardTag backgroundColor="#62B957">
-                <GrassTypeWhiteSvg width={15} height={15} alt="Grass Type" />
-                <CardTagText>Grass</CardTagText>
-              </CardTag>
-              <CardTag backgroundColor="#A552CC" marginLeft="5px">
-                <PoisonTypeWhiteSvg width={15} height={15} alt="Poison Type" />
-                <CardTagText>Poison</CardTagText>
-              </CardTag>
-            </CardTags>
-          </CardInfoWrapper>
-          <View
-            style={{
-              position: 'absolute',
-              right: '5%',
-              top: '-30%',
-            }}
+      <ListContainer>
+        {pokemons.map((pokemon) => (
+          <Card
+            key={pokemon.id}
+            backgroundColor={
+              handlePokemonTypeColors(pokemon.types[0].name).backgroundColor
+            }
           >
-            <BulbasaurSvg width={130} height={130} alt="Bulbasaur" />
-          </View>
-        </Card>
-        <Card>
-          <CardInfoWrapper>
-            <CardNumber>#002</CardNumber>
-            <CardTitle>Ivysaur</CardTitle>
-            <CardTags>
-              <CardTag backgroundColor="#62B957">
-                <GrassTypeWhiteSvg width={15} height={15} alt="Grass Type" />
-                <CardTagText>Grass</CardTagText>
-              </CardTag>
-              <CardTag backgroundColor="#A552CC" marginLeft="5px">
-                <PoisonTypeWhiteSvg width={15} height={15} alt="Poison Type" />
-                <CardTagText>Poison</CardTagText>
-              </CardTag>
-            </CardTags>
-          </CardInfoWrapper>
-          <View
-            style={{
-              position: 'absolute',
-              right: '5%',
-              top: '-30%',
-            }}
-          >
-            <IvysaurSvg width={130} height={130} alt="Bulbasaur" />
-          </View>
-        </Card>
-      </ScrollView>
+            <CardInfoWrapper>
+              <CardNumber>#{addLeftZeros(pokemon.number)}</CardNumber>
+              <CardTitle>{uppercaseFirstLetter(pokemon.name)}</CardTitle>
+              <CardTags>
+                {pokemon.types.map((type, index) => (
+                  <CardTag
+                    key={type.id}
+                    backgroundColor={handlePokemonTypeColors(type.name).color}
+                    marginLeft={index > 0 ? '5px' : '0'}
+                  >
+                    <TypeIcon source={handlePokemonTypeIcons(type.name)} />
+                    <CardTagText>{uppercaseFirstLetter(type.name)}</CardTagText>
+                  </CardTag>
+                ))}
+              </CardTags>
+            </CardInfoWrapper>
+            <PokemonImageWrapper>
+              <PokemonImage source={{ uri: pokemon.image }} />
+            </PokemonImageWrapper>
+          </Card>
+        ))}
+      </ListContainer>
+      <FiltersModal
+        isModalVisible={isFiltersModalVisible}
+        setModalVisible={setFiltersModalVisible}
+      />
     </Container>
   );
 }
