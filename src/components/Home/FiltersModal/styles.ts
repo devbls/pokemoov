@@ -5,12 +5,27 @@ interface TouchableIconProps {
   backgroundColor: string;
 }
 
+interface ButtonContainerProps {
+  backgroundColor: string;
+}
+
+interface ButtonTitleProps {
+  color: string;
+}
+
 export const Container = styled.View`
-  display: flex;
-  padding: 30px 40px;
+  max-height: 80%;
   background-color: #fff;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
+`;
+
+export const ScrollableContainer = styled.ScrollView`
+  display: flex;
+`;
+
+export const ContentWrapper = styled.View`
+  padding: 30px 40px;
 `;
 
 export const Title = styled.Text`
@@ -59,6 +74,30 @@ export const TouchableIcon = styled.TouchableOpacity<TouchableIconProps>`
     `};
 `;
 
-export const TypeIcon = styled.Image`
+export const FilterIcon = styled.Image`
   color: white;
+`;
+
+export const ButtonsContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 50px;
+`;
+
+export const ButtonContainer = styled.View<ButtonContainerProps>`
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: 10px;
+`;
+
+export const ButtonTitle = styled.Text<ButtonTitleProps>`
+  font-size: 16px;
+  font-family: 'SFProDisplayRegular';
+  line-height: 19px;
+  color: ${({ color }) => color};
 `;

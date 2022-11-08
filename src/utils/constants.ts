@@ -16,6 +16,12 @@ import PsychicTypeIcon from '../assets/icons/types/psychic.png';
 import RockTypeIcon from '../assets/icons/types/rock.png';
 import SteelTypeIcon from '../assets/icons/types/steel.png';
 import WaterTypeIcon from '../assets/icons/types/water.png';
+import ShortHeightIcon from '../assets/icons/heights/short.png';
+import MediumHeightIcon from '../assets/icons/heights/medium.png';
+import TallHeightIcon from '../assets/icons/heights/tall.png';
+import LightWeightIcon from '../assets/icons/weights/light.png';
+import NormalWeightIcon from '../assets/icons/weights/normal.png';
+import HeavyWeightIcon from '../assets/icons/weights/heavy.png';
 
 export const constants = {
   TYPE_ICONS: [
@@ -108,6 +114,40 @@ export const constants = {
       name: 'water',
       icon: WaterTypeIcon,
       color: '#4A90DA',
+    },
+  ],
+  HEIGHTS_ICONS: [
+    {
+      name: 'short',
+      icon: ShortHeightIcon,
+      color: '#FFC5E6',
+    },
+    {
+      name: 'medium',
+      icon: MediumHeightIcon,
+      color: '#AEBFD7',
+    },
+    {
+      name: 'tall',
+      icon: TallHeightIcon,
+      color: '#AAACB8',
+    },
+  ],
+  WEIGHTS_ICONS: [
+    {
+      name: 'light',
+      icon: LightWeightIcon,
+      color: '#99CD7C',
+    },
+    {
+      name: 'normal',
+      icon: NormalWeightIcon,
+      color: '#57B2DC',
+    },
+    {
+      name: 'heavy',
+      icon: HeavyWeightIcon,
+      color: '#5A92A5',
     },
   ],
 };

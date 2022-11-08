@@ -94,7 +94,10 @@ function Home() {
                     backgroundColor={handlePokemonTypeColors(type.name).color}
                     marginLeft={index > 0 ? '5px' : '0'}
                   >
-                    <TypeIcon source={handlePokemonTypeIcons(type.name)} />
+                    <TypeIcon
+                      source={handlePokemonTypeIcons(type.name)}
+                      style={{ tintColor: '#fff' }}
+                    />
                     <CardTagText>{uppercaseFirstLetter(type.name)}</CardTagText>
                   </CardTag>
                 ))}

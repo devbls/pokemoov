@@ -130,7 +130,6 @@ export const PokemonImage = styled.Image`
 export const TypeIcon = styled.Image`
   width: 15px;
   height: 15px;
-  tint-color: #fff;
 `;
 
 export const ListContainer = styled.View`
