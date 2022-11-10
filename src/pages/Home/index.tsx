@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import {
   Container,
@@ -32,11 +33,14 @@ import {
 import { getPokemons } from '../../services/api/pokemon';
 import { addLeftZeros } from '../../utils/numbers';
 import { handlePokemonTypeIcons } from '../../utils/icons';
+import { sortTypes } from '../../utils/arrays';
 
 function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isFiltersModalVisible, setFiltersModalVisible] = useState(false);
+
+  const navigation = useNavigation();
 
   const toggleFiltersModal = () => {
     setFiltersModalVisible(!isFiltersModalVisible);
@@ -80,6 +84,12 @@ function Home() {
         {pokemons.map((pokemon) => (
           <Card
             key={pokemon.id}
+            onPress={() =>
+              navigation.navigate(
+                'PokemonDetails' as never,
+                { id: pokemon.id } as never
+              )
+            }
             backgroundColor={
               handlePokemonTypeColors(pokemon.types[0].name).backgroundColor
             }
@@ -88,19 +98,23 @@ function Home() {
               <CardNumber>#{addLeftZeros(pokemon.number)}</CardNumber>
               <CardTitle>{uppercaseFirstLetter(pokemon.name)}</CardTitle>
               <CardTags>
-                {pokemon.types.map((type, index) => (
-                  <CardTag
-                    key={type.id}
-                    backgroundColor={handlePokemonTypeColors(type.name).color}
-                    marginLeft={index > 0 ? '5px' : '0'}
-                  >
-                    <TypeIcon
-                      source={handlePokemonTypeIcons(type.name)}
-                      style={{ tintColor: '#fff' }}
-                    />
-                    <CardTagText>{uppercaseFirstLetter(type.name)}</CardTagText>
-                  </CardTag>
-                ))}
+                {sortTypes(pokemon.types, pokemon.mainType).map(
+                  (type, index) => (
+                    <CardTag
+                      key={type.id}
+                      backgroundColor={handlePokemonTypeColors(type.name).color}
+                      marginLeft={index > 0 ? '5px' : '0'}
+                    >
+                      <TypeIcon
+                        source={handlePokemonTypeIcons(type.name)}
+                        style={{ tintColor: '#fff' }}
+                      />
+                      <CardTagText>
+                        {uppercaseFirstLetter(type.name)}
+                      </CardTagText>
+                    </CardTag>
+                  )
+                )}
               </CardTags>
             </CardInfoWrapper>
             <PokemonImageWrapper>

@@ -55,7 +55,7 @@ export const InputWrapper = styled.View`
   margin-top: 24px;
 `;
 
-export const Card = styled.View<CardProps>`
+export const Card = styled.TouchableOpacity<CardProps>`
   height: 116px;
   display: flex;
   flex-direction: row;
@@ -73,16 +73,14 @@ export const CardInfoWrapper = styled.View`
 
 export const CardNumber = styled.Text`
   font-size: 12px;
-  font-weight: 700;
-  font-family: 'SFProDisplayRegular';
+  font-family: 'SFProDisplayBold';
   line-height: 14px;
   color: rgba(23, 23, 27, 0.6);
 `;
 
 export const CardTitle = styled.Text`
   font-size: 26px;
-  font-weight: 700;
-  font-family: 'SFProDisplayRegular';
+  font-family: 'SFProDisplayBold';
   line-height: 31px;
   color: #ffffff;
 `;
@@ -94,11 +92,10 @@ export const CardTags = styled.View`
 `;
 
 export const CardTag = styled.View<CardTagProps>`
-  height: 25px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 5px;
+  padding: 5px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 3px;
 

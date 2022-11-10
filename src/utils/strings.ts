@@ -102,4 +102,40 @@ function handlePokemonTypeColors(type: string) {
   }
 }
 
-export { uppercaseFirstLetter, handlePokemonTypeColors };
+function abbreviatePokemonStats(value: string) {
+  switch (value) {
+    case 'Special Attack':
+      return 'Sp. Atk';
+    case 'Special Defense':
+      return 'Sp. Def';
+    default:
+      return value;
+  }
+}
+
+function formatPokemonStatValue(value: string) {
+  switch (value) {
+    case '0.25':
+      return '¼';
+    case '0.5':
+      return '½';
+    case '1':
+      return '';
+    default:
+      return value;
+  }
+}
+
+function handlePokemonFriendshipRating(value: number) {
+  if (value > 0 && value <= 99) return 'normal';
+  if (value >= 100 && value <= 199) return 'medium';
+  if (value >= 200 && value <= 255) return 'high';
+}
+
+export {
+  uppercaseFirstLetter,
+  handlePokemonTypeColors,
+  abbreviatePokemonStats,
+  formatPokemonStatValue,
+  handlePokemonFriendshipRating,
+};
