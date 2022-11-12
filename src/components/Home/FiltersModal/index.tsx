@@ -18,6 +18,7 @@ import {
   ButtonTitle,
 } from './styles';
 import { constants } from '../../../utils/constants';
+import { handlePokemonTypeIcons } from '../../../utils/icons';
 
 interface Props {
   isModalVisible: boolean;
@@ -104,11 +105,7 @@ function FiltersModal({ isModalVisible, setModalVisible }: Props) {
       }}
     >
       <Container>
-        <ScrollableContainer
-          alwaysBounceHorizontal={false}
-          alwaysBounceVertical={false}
-          bounces={false}
-        >
+        <ScrollableContainer>
           <ContentWrapper>
             <Title>Filters</Title>
             <Subtitle>
@@ -118,7 +115,7 @@ function FiltersModal({ isModalVisible, setModalVisible }: Props) {
             <FilterRow>
               <FilterRowTitle>Types</FilterRowTitle>
               <FilterRowItems horizontal showsHorizontalScrollIndicator={false}>
-                {constants.TYPE_ICONS.map((type, index) => (
+                {constants.TYPES.map((type, index) => (
                   <TouchableIcon
                     key={String(index)}
                     marginRight="10px"
@@ -130,7 +127,7 @@ function FiltersModal({ isModalVisible, setModalVisible }: Props) {
                     }
                   >
                     <FilterIcon
-                      source={type.icon}
+                      source={handlePokemonTypeIcons(type.name).img}
                       style={{
                         tintColor:
                           selectedTypes.indexOf(type.name) !== -1
@@ -145,7 +142,7 @@ function FiltersModal({ isModalVisible, setModalVisible }: Props) {
             <FilterRow>
               <FilterRowTitle>Weaknesses</FilterRowTitle>
               <FilterRowItems horizontal showsHorizontalScrollIndicator={false}>
-                {constants.TYPE_ICONS.map((weakness, index) => (
+                {constants.TYPES.map((weakness, index) => (
                   <TouchableIcon
                     key={String(index)}
                     marginRight="10px"
@@ -157,7 +154,7 @@ function FiltersModal({ isModalVisible, setModalVisible }: Props) {
                     }
                   >
                     <FilterIcon
-                      source={weakness.icon}
+                      source={handlePokemonTypeIcons(weakness.name).img}
                       style={{
                         tintColor:
                           selectedWeaknesses.indexOf(weakness.name) !== -1

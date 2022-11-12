@@ -95,6 +95,7 @@ export const CardTag = styled.View<CardTagProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 5px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 3px;
@@ -125,8 +126,8 @@ export const PokemonImage = styled.Image`
 `;
 
 export const TypeIcon = styled.Image`
-  width: 15px;
-  height: 15px;
+  max-width: 15px;
+  max-height: 15px;
 `;
 
 export const ListContainer = styled.View`

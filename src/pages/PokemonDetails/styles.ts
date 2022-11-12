@@ -106,6 +106,7 @@ export const PokemonTypes = styled.View`
 export const PokemonTypeTag = styled.View<PokemonTypeTagProps>`
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 5px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 3px;
@@ -115,6 +116,11 @@ export const PokemonTypeTag = styled.View<PokemonTypeTagProps>`
     css`
       margin-left: ${marginLeft};
     `};
+`;
+
+export const PokemonTypeIcon = styled.Image`
+  max-width: 15px;
+  max-height: 15px;
 `;
 
 export const PokemonTypeTagText = styled.Text`
@@ -208,10 +214,11 @@ export const SmallCategoryItemDescription = styled.Text`
 `;
 
 export const WeaknessIcon = styled.View<WeaknessIconProps>`
-  align-items: center;
-  justify-content: center;
   width: 25px;
   height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 3px;
 

@@ -38,6 +38,7 @@ import {
   TypeDefenseItem,
   TypeIconWrapper,
   TypeDefenseValue,
+  PokemonTypeIcon,
 } from './styles';
 import ArrowLeftSvg from '../../assets/icons/arrow-left.svg';
 import { handlePokemonTypeIcons } from '../../utils/icons';
@@ -110,8 +111,8 @@ function PokemonDetails() {
                         }
                         marginLeft={index > 0 ? '5px' : '0'}
                       >
-                        <Image
-                          source={handlePokemonTypeIcons(type.name)}
+                        <PokemonTypeIcon
+                          source={handlePokemonTypeIcons(type.name).smallImg}
                           style={{ tintColor: '#fff' }}
                         />
                         <PokemonTypeTagText>
@@ -200,8 +201,10 @@ function PokemonDetails() {
                           }
                           marginLeft={index > 0 ? '10px' : '0'}
                         >
-                          <Image
-                            source={handlePokemonTypeIcons(weakness.name)}
+                          <PokemonTypeIcon
+                            source={
+                              handlePokemonTypeIcons(weakness.name).smallImg
+                            }
                             style={{ tintColor: '#fff' }}
                           />
                         </WeaknessIcon>
@@ -368,7 +371,9 @@ function PokemonDetails() {
                           }
                         >
                           <Image
-                            source={handlePokemonTypeIcons(weakness.name)}
+                            source={
+                              handlePokemonTypeIcons(weakness.name).smallImg
+                            }
                             style={{ tintColor: '#fff' }}
                           />
                         </TypeIconWrapper>
@@ -392,7 +397,9 @@ function PokemonDetails() {
                           }
                         >
                           <Image
-                            source={handlePokemonTypeIcons(weakness.name)}
+                            source={
+                              handlePokemonTypeIcons(weakness.name).smallImg
+                            }
                             style={{ tintColor: '#fff' }}
                           />
                         </TypeIconWrapper>

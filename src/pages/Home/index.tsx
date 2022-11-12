@@ -20,7 +20,6 @@ import {
   TypeIcon,
   ListContainer,
 } from './styles';
-import GenerationsSvg from '../../assets/icons/generations.svg';
 import SortSvg from '../../assets/icons/sort.svg';
 import FiltersSvg from '../../assets/icons/filters.svg';
 import CustomInput from '../../components/CustomInput';
@@ -34,17 +33,23 @@ import { getPokemons } from '../../services/api/pokemon';
 import { addLeftZeros } from '../../utils/numbers';
 import { handlePokemonTypeIcons } from '../../utils/icons';
 import { sortTypes } from '../../utils/arrays';
+import SortModal from '../../components/Home/SortModal';
 
 function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isFiltersModalVisible, setFiltersModalVisible] = useState(false);
+  const [isSortModalVisible, setSortModalVisible] = useState(false);
 
   const navigation = useNavigation();
 
-  const toggleFiltersModal = () => {
+  function toggleFiltersModal() {
     setFiltersModalVisible(!isFiltersModalVisible);
-  };
+  }
+
+  function toggleSortModal() {
+    setSortModalVisible(!isSortModalVisible);
+  }
 
   async function getPokemonsList() {
     const data = await getPokemons();
@@ -59,10 +64,7 @@ function Home() {
   return (
     <Container>
       <FiltersStack>
-        <TouchableIcon marginRight="24px">
-          <GenerationsSvg width={24} height={24} />
-        </TouchableIcon>
-        <TouchableIcon marginRight="24px">
+        <TouchableIcon onPress={toggleSortModal} marginRight="24px">
           <SortSvg width={24} height={24} />
         </TouchableIcon>
         <TouchableIcon onPress={toggleFiltersModal}>
@@ -106,7 +108,7 @@ function Home() {
                       marginLeft={index > 0 ? '5px' : '0'}
                     >
                       <TypeIcon
-                        source={handlePokemonTypeIcons(type.name)}
+                        source={handlePokemonTypeIcons(type.name).smallImg}
                         style={{ tintColor: '#fff' }}
                       />
                       <CardTagText>
@@ -126,6 +128,10 @@ function Home() {
       <FiltersModal
         isModalVisible={isFiltersModalVisible}
         setModalVisible={setFiltersModalVisible}
+      />
+      <SortModal
+        isModalVisible={isSortModalVisible}
+        setModalVisible={setSortModalVisible}
       />
     </Container>
   );
