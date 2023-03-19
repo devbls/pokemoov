@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-native-modal';
 
 import {
@@ -15,11 +15,16 @@ import {
 interface Props {
   isModalVisible: boolean;
   setModalVisible: (value: boolean) => void;
+  selectedSortMethod: string;
+  setSelectedSortMethod: (value: string) => void;
 }
 
-function SortModal({ isModalVisible, setModalVisible }: Props) {
-  const [selectedSort, setSelectedSort] = useState('');
-
+function SortModal({
+  isModalVisible,
+  setModalVisible,
+  selectedSortMethod,
+  setSelectedSortMethod,
+}: Props) {
   return (
     <Modal
       isVisible={isModalVisible}
@@ -39,44 +44,52 @@ function SortModal({ isModalVisible, setModalVisible }: Props) {
             </Subtitle>
             <ButtonsList>
               <ButtonContainer
-                onPress={() => setSelectedSort('smallestNumber')}
+                onPress={() => setSelectedSortMethod('numberAscendent')}
                 backgroundColor={
-                  selectedSort === 'smallestNumber' ? '#EA5D60' : '#F2F2F2'
+                  selectedSortMethod === 'numberAscendent'
+                    ? '#EA5D60'
+                    : '#F2F2F2'
                 }
               >
                 <ButtonTitle
                   color={
-                    selectedSort === 'smallestNumber' ? '#FFFFFF' : '#747476'
+                    selectedSortMethod === 'numberAscendent'
+                      ? '#FFFFFF'
+                      : '#747476'
                   }
                 >
                   Smallest number first
                 </ButtonTitle>
               </ButtonContainer>
               <ButtonContainer
-                onPress={() => setSelectedSort('highestNumber')}
+                onPress={() => setSelectedSortMethod('numberDescendent')}
                 backgroundColor={
-                  selectedSort === 'highestNumber' ? '#EA5D60' : '#F2F2F2'
+                  selectedSortMethod === 'numberDescendent'
+                    ? '#EA5D60'
+                    : '#F2F2F2'
                 }
                 marginTop="20px"
               >
                 <ButtonTitle
                   color={
-                    selectedSort === 'highestNumber' ? '#FFFFFF' : '#747476'
+                    selectedSortMethod === 'numberDescendent'
+                      ? '#FFFFFF'
+                      : '#747476'
                   }
                 >
                   Highest number first
                 </ButtonTitle>
               </ButtonContainer>
               <ButtonContainer
-                onPress={() => setSelectedSort('alphabeticAscendent')}
+                onPress={() => setSelectedSortMethod('nameAscendent')}
                 backgroundColor={
-                  selectedSort === 'alphabeticAscendent' ? '#EA5D60' : '#F2F2F2'
+                  selectedSortMethod === 'nameAscendent' ? '#EA5D60' : '#F2F2F2'
                 }
                 marginTop="20px"
               >
                 <ButtonTitle
                   color={
-                    selectedSort === 'alphabeticAscendent'
+                    selectedSortMethod === 'nameAscendent'
                       ? '#FFFFFF'
                       : '#747476'
                   }
@@ -85,9 +98,9 @@ function SortModal({ isModalVisible, setModalVisible }: Props) {
                 </ButtonTitle>
               </ButtonContainer>
               <ButtonContainer
-                onPress={() => setSelectedSort('alphabeticDescendent')}
+                onPress={() => setSelectedSortMethod('nameDescendent')}
                 backgroundColor={
-                  selectedSort === 'alphabeticDescendent'
+                  selectedSortMethod === 'nameDescendent'
                     ? '#EA5D60'
                     : '#F2F2F2'
                 }
@@ -95,7 +108,7 @@ function SortModal({ isModalVisible, setModalVisible }: Props) {
               >
                 <ButtonTitle
                   color={
-                    selectedSort === 'alphabeticDescendent'
+                    selectedSortMethod === 'nameDescendent'
                       ? '#FFFFFF'
                       : '#747476'
                   }

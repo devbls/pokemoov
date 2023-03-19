@@ -56,6 +56,10 @@ interface CategoryItemDescriptionProps {
   color?: string;
 }
 
+interface StatPercentageBarProps {
+  backgroundColor: string;
+}
+
 export const Container = styled.ScrollView<ContainerProps>`
   display: flex;
   flex-direction: column;
@@ -258,11 +262,11 @@ export const StatValue = styled.Text<StatValueProps>`
   margin-left: 10px;
 `;
 
-export const StatPercentageBar = styled.View`
+export const StatPercentageBar = styled.View<StatPercentageBarProps>`
   width: 138px;
   height: 4px;
   margin: 0 20px;
-  background: #62b957;
+  background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 2px;
 `;
 

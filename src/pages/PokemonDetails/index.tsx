@@ -145,7 +145,11 @@ function PokemonDetails() {
               <>
                 <Description>{pokemon.pokedexEntry}</Description>
                 <CategoryTitle
-                  color={handlePokemonTypeColors('grass').color}
+                  color={
+                    handlePokemonTypeColors(
+                      sortTypes(pokemon.types, pokemon.mainType)[0].name
+                    ).color
+                  }
                   marginTop="30px"
                 >
                   Pokédex Data
@@ -212,7 +216,11 @@ function PokemonDetails() {
                   </CompositeCategoryItemDescription>
                 </CategoryItem>
                 <CategoryTitle
-                  color={handlePokemonTypeColors('grass').color}
+                  color={
+                    handlePokemonTypeColors(
+                      sortTypes(pokemon.types, pokemon.mainType)[0].name
+                    ).color
+                  }
                   marginTop="20px"
                 >
                   Training
@@ -260,7 +268,11 @@ function PokemonDetails() {
                   </CategoryItemDescription>
                 </CategoryItem>
                 <CategoryTitle
-                  color={handlePokemonTypeColors('grass').color}
+                  color={
+                    handlePokemonTypeColors(
+                      sortTypes(pokemon.types, pokemon.mainType)[0].name
+                    ).color
+                  }
                   marginTop="20px"
                 >
                   Breeding
@@ -309,7 +321,13 @@ function PokemonDetails() {
             )}
             {activeTab === 1 && (
               <>
-                <CategoryTitle color={handlePokemonTypeColors('grass').color}>
+                <CategoryTitle
+                  color={
+                    handlePokemonTypeColors(
+                      sortTypes(pokemon.types, pokemon.mainType)[0].name
+                    ).color
+                  }
+                >
                   Base Stats
                 </CategoryTitle>
                 <Stats>
@@ -320,7 +338,13 @@ function PokemonDetails() {
                     >
                       <StatName>{abbreviatePokemonStats(stat.name)}</StatName>
                       <StatValue>{stat.value}</StatValue>
-                      <StatPercentageBar />
+                      <StatPercentageBar
+                        backgroundColor={
+                          handlePokemonTypeColors(
+                            sortTypes(pokemon.types, pokemon.mainType)[0].name
+                          ).color
+                        }
+                      />
                       <StatMinValue>{stat.min}</StatMinValue>
                       <StatMaxValue>{stat.max}</StatMaxValue>
                     </StatRow>
@@ -332,7 +356,7 @@ function PokemonDetails() {
                     <StatValue fontFamily="SFProDisplayBold">
                       {statsSum}
                     </StatValue>
-                    <StatPercentageBar />
+                    <StatPercentageBar backgroundColor="transparent" />
                     <StatLabel width="30px" textAlign="right">
                       Min
                     </StatLabel>
@@ -348,7 +372,11 @@ function PokemonDetails() {
                   IVs.
                 </StatsDescription>
                 <CategoryTitle
-                  color={handlePokemonTypeColors('grass').color}
+                  color={
+                    handlePokemonTypeColors(
+                      sortTypes(pokemon.types, pokemon.mainType)[0].name
+                    ).color
+                  }
                   marginTop="20px"
                 >
                   Type Defenses

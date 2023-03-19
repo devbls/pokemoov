@@ -6,6 +6,7 @@ interface TouchableIconProps {
 
 interface CardProps {
   backgroundColor: string;
+  marginBottom?: string;
 }
 
 interface CardTagProps {
@@ -13,10 +14,8 @@ interface CardTagProps {
   backgroundColor: string;
 }
 
-export const Container = styled.ScrollView`
-  display: flex;
+export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: 0 40px;
   background-color: #fff;
 `;
 
@@ -60,11 +59,17 @@ export const Card = styled.TouchableOpacity<CardProps>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 30px;
   padding: 20px;
+  margin-top: 30px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px;
   position: relative;
+
+  ${({ marginBottom }) =>
+    marginBottom &&
+    css`
+      margin-bottom: ${marginBottom};
+    `};
 `;
 
 export const CardInfoWrapper = styled.View`
@@ -109,7 +114,6 @@ export const CardTag = styled.View<CardTagProps>`
 
 export const CardTagText = styled.Text`
   font-size: 12px;
-  line-height: 14px;
   color: #ffffff;
   margin-left: 5px;
 `;
@@ -130,6 +134,6 @@ export const TypeIcon = styled.Image`
   max-height: 15px;
 `;
 
-export const ListContainer = styled.View`
-  margin-bottom: 40px;
+export const ListContainer = styled.FlatList`
+  padding: 0 40px;
 `;
